@@ -10,19 +10,15 @@ int main(int argc,char* argv[])
     char* argm[64];
     int len = read(0,buf,512);
     buf[len] = 0;
+    printf("buf : %c",buf[1]);
     int i=0;
     int rargv_num=0;
     for(int i=1;i<argc;i++)
         argm[rargv_num++]=argv[i];
     while(i<len)
     {   int j=0;
-        while(i<len && buf[i]!='\n' )
-        {
+        while(i<len && buf[i]!='\n')
             rargv[j++]=buf[i++];
-            // if(i<len-1 && buf[i]=='\\' && buf[i+1]=='n')
-            //     break;
-        }
-            
         rargv[j]=0;
         argm[rargv_num]=rargv;
 
@@ -34,7 +30,6 @@ int main(int argc,char* argv[])
         {
             wait(0);
         }
-        i++;
         i++;
 
     }
