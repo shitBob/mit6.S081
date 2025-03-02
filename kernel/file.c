@@ -12,6 +12,10 @@
 #include "file.h"
 #include "stat.h"
 #include "proc.h"
+#include "sysinfo.h"
+
+
+
 
 struct devsw devsw[NDEV];
 struct {
@@ -98,6 +102,21 @@ filestat(struct file *f, uint64 addr)
       return -1;
     return 0;
   }
+  return -1;
+}
+
+int
+sysstat( uint64 addr)
+{
+  struct proc *p = myproc();
+  struct sysinfo sysi;
+  sysi.freemem = scountfree();
+  sysi.nproc   = scountproc();
+  
+    if(copyout(p->pagetable, addr, (char *)&sysi, sizeof(sysi)) < 0)
+      return -1;
+    return 0;
+
   return -1;
 }
 

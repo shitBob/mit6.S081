@@ -95,3 +95,15 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+uint64
+sys_trace(void)
+{
+   int mock;
+   if(argint(0, &mock) < 0)
+    return -1;
+   struct proc* p = myproc();
+   p->mock = mock;
+   return 0;
+}
+

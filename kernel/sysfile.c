@@ -115,6 +115,16 @@ sys_fstat(void)
   return filestat(f, st);
 }
 
+uint64
+sys_sysinfo(void)
+{
+  uint64 si;
+  if(argaddr(0,&si)<0)
+    return -1;
+  return sysstat(si);
+}
+
+
 // Create the path new as a link to the same inode as old.
 uint64
 sys_link(void)
